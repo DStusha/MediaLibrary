@@ -1,0 +1,139 @@
+﻿<Window x:Class="MediaLibrary.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:MediaLibrary.ViewModels"
+        xmlns:local="clr-namespace:MediaLibrary"
+        mc:Ignorable="d"
+        Title="Цифровая медиатека" Height="600" Width="800" MinWidth="800" MinHeight="600">
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/> 
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="TreeStyle" TargetType="{x:Type TreeView}">
+            <Setter Property="SelectedValuePath"
+                                Value="Files" />
+        </Style>
+        <Style x:Key="TreeCatalogItem" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsSelected"
+                                Value="{Binding Path=IsCatalogSelected, Mode=TwoWay}" />
+            <Setter Property="IsExpanded"
+                                Value="{Binding Path=IsCatalogExpanded, Mode=TwoWay}" />
+        </Style>
+        <Style x:Key="TreeCategoryItem" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsSelected"
+                             Value="{Binding Path=IsCategorySelected, Mode=TwoWay}" />
+        </Style>
+        <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+            <Style.Setters>
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="Salmon"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="390"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TabControl>
+            <TabItem Header="Каталоги">
+                <TreeView ItemContainerStyle="{StaticResource TreeCatalogItem}" Style="{StaticResource TreeStyle}" Name="trwCatalogs" Margin="5" ItemsSource="{Binding Trees.CatalogsRoot}" >
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding CatalogChildren}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Name="img" Width="15" Height="18" Stretch="Fill" Source="{Binding Path=CatalogName,
+                     Converter={x:Static local:ToImageConverter.Instance}}"/>
+                                <TextBlock Text="{Binding CatalogName}" Margin="5,0" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedItemChanged">
+                            <i:InvokeCommandAction Command="{Binding Trees.SelectedCommand}"
+                                       CommandParameter="{Binding ElementName=trwCatalogs, Path=SelectedValue}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TreeView>
+            </TabItem>
+            <TabItem Header="Категории"> 
+                <TreeView ItemContainerStyle="{StaticResource TreeCategoryItem}" Style="{StaticResource TreeStyle}" Name="trwCategories" Margin="5" ItemsSource="{Binding Trees.CategoriesRoot}">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Categories}">
+                            <TextBlock Text="{Binding MediaTypeName}" />
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CategoryName}" />
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedItemChanged">
+                            <i:InvokeCommandAction Command="{Binding Trees.SelectedCommand}"
+                                       CommandParameter="{Binding ElementName=trwCategories, Path=SelectedValue}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TreeView>
+            </TabItem>
+        </TabControl>
+        <ScrollViewer Grid.Column="1"  VerticalScrollBarVisibility="Auto">
+            <ItemsControl Grid.Column="1" ItemsSource="{Binding Path= Trees.SelectedValue}" Margin=" 5,20,5,10">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Margin ="10" Orientation="Horizontal" IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <DataTemplate.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="13"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Margin" Value="5"/>
+                            </Style>
+                    </DataTemplate.Resources>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <StackPanel Name="panel" Width="90" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,10,0,0">
+                                <StackPanel.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Открыть" Command="{Binding PlayFileCommand}" CommandParameter="{Binding File}"/>
+                                        <MenuItem Header="Добавить в базу" Command="{Binding SaveFileCommand}" CommandParameter="{Binding File}"></MenuItem>
+                                    </ContextMenu>
+                                </StackPanel.ContextMenu>
+                            <Image Width="70" Height="70" Stretch="Fill" Source="{Binding Path=File.Type,
+                     Converter={x:Static local:ToImageConverter.Instance}}"/>
+                            <TextBlock Text="{Binding File.Name}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        </ScrollViewer>
+        <StackPanel Grid.Column="2" Orientation="Vertical">
+            <MediaElement Source="{Binding File.MediaElementSourse}"/>
+            <StackPanel  Orientation="Horizontal">
+                <Button x:Name="playButton" Content="Play" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" Height="25"/>
+                <Button x:Name="pauseButton" Content="Pause"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Height="25"/>
+                <Button x:Name="stopButton" Content="Stop" VerticalAlignment="Center" HorizontalAlignment="Right" Width="60" Height="25" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UnloadedCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+</Window>

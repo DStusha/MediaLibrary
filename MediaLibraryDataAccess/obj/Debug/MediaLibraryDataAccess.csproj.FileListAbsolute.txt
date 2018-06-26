@@ -1,0 +1,11 @@
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\MediaLibraryDataAccess.exe.config
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\MediaLibraryDataAccess.exe
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\MediaLibraryDataAccess.pdb
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\EntityFramework.dll
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\EntityFramework.xml
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\obj\Debug\MediaLibraryDataAccess.exe
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\obj\Debug\MediaLibraryDataAccess.pdb

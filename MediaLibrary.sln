@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaLibrary", "MediaLibrary\MediaLibrary.csproj", "{D088D278-4FBD-40B6-9D21-55FD04CE2847}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaLibraryDataAccess", "MediaLibraryDataAccess\MediaLibraryDataAccess.csproj", "{BAD6AC2B-1819-4A61-B022-5A9B305D7053}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D088D278-4FBD-40B6-9D21-55FD04CE2847}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D088D278-4FBD-40B6-9D21-55FD04CE2847}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D088D278-4FBD-40B6-9D21-55FD04CE2847}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD6AC2B-1819-4A61-B022-5A9B305D7053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD6AC2B-1819-4A61-B022-5A9B305D7053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD6AC2B-1819-4A61-B022-5A9B305D7053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD6AC2B-1819-4A61-B022-5A9B305D7053}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MediaLibrary.ViewModels;
+using MediaLibrary.Views;
 using System.Windows;
 
 namespace MediaLibrary
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        public DisplayRootRegistry displayRootRegistry = new DisplayRootRegistry();
+        MainWindowViewModel mainWindowViewModel;
+        public App()
+        {
+            displayRootRegistry.RegisterWindowType<MainWindowViewModel, MainWindow>();
+            displayRootRegistry.RegisterWindowType<SaveFileWindowViewModel, SaveFileWindow>();
+        }
+
+        protected override async void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            mainWindowViewModel = new MainWindowViewModel();
+            await displayRootRegistry.ShowModalPresentation(mainWindowViewModel);
+            Shutdown();
+        }
     }
 }

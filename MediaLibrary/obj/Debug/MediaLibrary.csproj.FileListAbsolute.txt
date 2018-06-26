@@ -9,8 +9,6 @@ C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debu
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\MediaLibrary.csproj.GenerateResource.Cache
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\MediaLibrary.exe
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\MediaLibrary.pdb
-C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\View\MainWindow.g.cs
-C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\View\MainWindow.baml
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\EntityFramework.dll
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\EntityFramework.xml
@@ -22,3 +20,11 @@ C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debu
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\Microsoft.Expression.Interactions.xml
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\System.Windows.Interactivity.xml
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\MediaLibrary.csprojResolveAssemblyReference.cache
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\MediaLibraryDataAccess.exe
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\MediaLibraryDataAccess.pdb
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\MediaLibraryDataAccess.exe.config
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\Views\MainWindow.g.cs
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\Views\MainWindow.baml
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\Views\SaveFileWindow.g.cs
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\Views\SaveFileWindow.baml
