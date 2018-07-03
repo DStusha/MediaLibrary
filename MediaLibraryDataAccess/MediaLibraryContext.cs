@@ -1,8 +1,8 @@
-using MediaLibraryDataAccess.DataAccess;
+using MediaLibraryDataAccess.Models;
 using System.Data.Entity;
 
 namespace MediaLibraryDataAccess
-{    
+{
     public partial class MediaLibraryContext : DbContext
     {
         public MediaLibraryContext()

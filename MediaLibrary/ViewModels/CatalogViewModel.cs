@@ -1,26 +1,58 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MediaLibrary.ViewModels
 {
     public class CatalogViewModel:BaseViewModel
     {
-        string catalogName;
-        public ObservableCollection<CatalogViewModel> CatalogChildren { get; set; }
-        public ObservableCollection<FileViewModel> Files { get; set; }
+        string name;
+        string fullName;
+        bool isSelected;
+        bool isExpanded;
+        public List<CatalogViewModel> CatalogChildren { get; set; }
 
         public CatalogViewModel()
         {
-            CatalogChildren = new ObservableCollection<CatalogViewModel>();
-            Files = new ObservableCollection<FileViewModel>();
+            CatalogChildren = new List<CatalogViewModel>();
         }
 
-        public string CatalogName
+        public string FullName
         {
-            get { return catalogName; }
+            get { return fullName; }
             set
             {
-                catalogName = value;
-                OnPropertyChanged("CatalogName");
+                fullName = value;
+                OnPropertyChanged("FullName");
+            }
+        }
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+
+        public bool IsExpanded
+        {
+            get { return isExpanded; }
+            set
+            {
+                isExpanded = value;
+                OnPropertyChanged("IsExpanded");
+            }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
             }
         }  
     }

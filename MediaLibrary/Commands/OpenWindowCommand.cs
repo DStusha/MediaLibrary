@@ -1,5 +1,4 @@
-﻿using MediaLibrary.Models;
-using MediaLibrary.ViewModels;
+﻿using MediaLibrary.ViewModels;
 using System;
 using System.Windows;
 
@@ -12,7 +11,7 @@ namespace MediaLibrary.Commands
         public override async void Execute(object parameter)
         { 
             var displayRootRegistry = (Application.Current as App).displayRootRegistry;
-            var saveFileViewModel = new SaveFileWindowViewModel(parameter as File);
+            var saveFileViewModel = new SaveFileWindowViewModel(parameter as FileViewModel);
             await displayRootRegistry.ShowModalPresentation(saveFileViewModel);
         }
     }

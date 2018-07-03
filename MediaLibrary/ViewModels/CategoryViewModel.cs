@@ -1,26 +1,39 @@
-﻿using System.Collections.ObjectModel;
-
-namespace MediaLibrary.ViewModels
+﻿namespace MediaLibrary.ViewModels
 {
     public class CategoryViewModel :BaseViewModel
     {
-        string categoryName;
-        public int Id { get; set; }
-        public ObservableCollection<FileViewModel> Files { get; set; }
+        string name;
+        bool isSelected;
+        int id;
 
-        public string CategoryName
+        public string Name
         {
-            get { return categoryName; }
+            get { return name; }
             set
             {
-                categoryName = value;
-                OnPropertyChanged("CategoryName");
+                name = value;
+                OnPropertyChanged("Name");
             }
         }
 
-        public CategoryViewModel()
+        public int Id
         {
-            Files = new ObservableCollection<FileViewModel>();
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        public bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
         }
     }
 }

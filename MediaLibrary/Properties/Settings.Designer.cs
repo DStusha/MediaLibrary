@@ -37,13 +37,13 @@ namespace MediaLibrary.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CategoryPath {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CategoryId {
             get {
-                return ((string)(this["CategoryPath"]));
+                return ((int)(this["CategoryId"]));
             }
             set {
-                this["CategoryPath"] = value;
+                this["CategoryId"] = value;
             }
         }
     }

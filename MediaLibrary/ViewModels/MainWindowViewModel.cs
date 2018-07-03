@@ -1,14 +1,16 @@
-﻿using System.Windows.Input;
-using MediaLibrary.Commands;
+﻿using MediaLibrary.Commands;
+using MediaLibrary.Logic;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MediaLibrary.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
         TreeViewModel trees;
-        FileViewModel file;
-        public ICommand UnloadedCommand { get; private set; }
-        public ICommand LoadedCommand { get; private set; }
+        public ICommand Collapse { get; private set; }
+        public ICommand Visible { get; private set; }
 
         public TreeViewModel Trees
         {
@@ -20,25 +22,27 @@ namespace MediaLibrary.ViewModels
             }
         }
 
-        public FileViewModel File
+        public MainWindowViewModel()
         {
-            get { return file; }
-            set
+            Collapse = new Command(CollapseElement);
+            Visible = new Command(VisibleElement);
+            Trees = new TreeViewModel() { CatalogPath = Properties.Settings.Default.CatalogPath,  SelectedValue = FileVMLogic.GetFiles(Properties.Settings.Default.CatalogPath), CategoryId = Properties.Settings.Default.CategoryId };
+        }
+
+        public void CollapseElement(object elem)
+        {
+            if(elem is UIElement)
             {
-                file = value;
-                OnPropertyChanged("File");
+                (elem as UIElement).Visibility = Visibility.Collapsed;
             }
         }
 
-        public MainWindowViewModel()
+        public void VisibleElement(object elem)
         {
-            Trees = new TreeViewModel();
-            File = new FileViewModel();
-            UnloadedCommand = new Command(Unloaded);
-            LoadedCommand = new Command(Loaded);
+            if (elem is UIElement)
+            {
+                (elem as UIElement).Visibility = Visibility.Visible;
+            }
         }
-
-        private void Unloaded() { }
-        private void Loaded() { }
     }
 }

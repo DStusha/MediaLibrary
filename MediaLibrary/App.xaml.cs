@@ -21,5 +21,10 @@ namespace MediaLibrary
             await displayRootRegistry.ShowModalPresentation(mainWindowViewModel);
             Shutdown();
         }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            mainWindowViewModel.Trees.Unloaded();
+        }
     }
 }

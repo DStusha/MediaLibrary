@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BAD6AC2B-1819-4A61-B022-5A9B305D7053}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{8D64FA90-09A2-450E-8FDB-56F4CC9AB75A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MediaLibraryDataAccess</RootNamespace>
     <AssemblyName>MediaLibraryDataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -50,15 +49,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\Category.cs" />
-    <Compile Include="DataAccess\File.cs" />
+    <Compile Include="DataServices\CategoryService.cs" />
+    <Compile Include="DataServices\MediaTypeService.cs" />
+    <Compile Include="DataServices\CatalogService.cs" />
+    <Compile Include="DataServices\FileService.cs" />
+    <Compile Include="FileTypesConstants.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Models\Catalog.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\File.cs" />
     <Compile Include="MediaLibraryContext.cs" />
-    <Compile Include="DataAccess\MediaType.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Models\MediaType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Database\backup.bak" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

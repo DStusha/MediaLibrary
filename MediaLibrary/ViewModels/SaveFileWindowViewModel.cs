@@ -1,5 +1,5 @@
-﻿using MediaLibrary.Models;
-using MediaLibrary.Commands;
+﻿using MediaLibrary.Commands;
+using MediaLibrary.Logic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows;
@@ -9,7 +9,7 @@ namespace MediaLibrary.ViewModels
     public class SaveFileWindowViewModel: BaseViewModel
     {
         private ObservableCollection<MediaTypeViewModel> types;
-        private File file;
+        private FileViewModel file;
         public ICommand Save { get; private set; }
         public ICommand Click { get; private set; }
 
@@ -23,7 +23,7 @@ namespace MediaLibrary.ViewModels
             }
         }
 
-        public File File
+        public FileViewModel File
         {
             get { return file; }
             set
@@ -35,9 +35,9 @@ namespace MediaLibrary.ViewModels
 
         public SaveFileWindowViewModel() : this(null) { }
 
-        public SaveFileWindowViewModel(File f)
+        public SaveFileWindowViewModel(FileViewModel f)
         {
-            Types = DBManager.GetMediaTypeViewModelsFromDB();
+            Types = MediaTypeVMLogic.GetMediaTypeViewModels();
             Save = new Command(SaveFile);
             Click = new Command(ButtonClick);
             file = f;
@@ -50,7 +50,7 @@ namespace MediaLibrary.ViewModels
 
         public void SaveFile(object parameter)
         {
-            DBManager.SaveFileToDB(file, (int)parameter);
+            FileVMLogic.SaveFileToDB(file, (int)parameter);
         }
     }
 }
