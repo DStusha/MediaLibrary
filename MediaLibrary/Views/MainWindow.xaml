@@ -87,10 +87,14 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Left" MinWidth="250" Orientation="Vertical">
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <Button Style="{StaticResource FirstButtonCollapseStyle}" CommandParameter="{Binding ElementName=tabControl}"/>
-            <TabControl DockPanel.Dock ="Bottom" Name="tabControl">
+            <Button Style="{StaticResource SecondButtonCollapseStyle}" CommandParameter="{Binding ElementName=filesPanel}" />
+            <Button Style="{StaticResource ThirdButtonCollapseStyle}" CommandParameter="{Binding ElementName=playerPanel}"/>
+        </StackPanel>
+        <DockPanel DockPanel.Dock="Left" MinWidth="150" MaxWidth="250">
+            <TabControl Name="tabControl">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding Trees.TabSelectedCommand}"
@@ -98,7 +102,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <TabItem Header="Каталоги">
-                    <TreeView ItemContainerStyle="{StaticResource TreeCatalogItemStyle}" Style="{StaticResource CatalogTreeStyle}" Name="trwCatalogs" Margin="5" ItemsSource="{Binding Trees.CatalogsRoot, IsAsync=True}" >
+                    <TreeView ItemContainerStyle="{StaticResource TreeCatalogItemStyle}" Style="{StaticResource CatalogTreeStyle}" Name="trwCatalogs" Margin="5" ItemsSource="{Binding Trees.CatalogsRoot}" >
                         <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding CatalogChildren}">
                                 <StackPanel Orientation="Horizontal">
@@ -136,50 +140,46 @@
                     </TreeView>
                 </TabItem>
             </TabControl>
-        </StackPanel>
-        <DockPanel MinWidth="400">
-            <Button DockPanel.Dock="Top" Style="{StaticResource SecondButtonCollapseStyle}" CommandParameter="{Binding ElementName=filesPanel}" />
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel DockPanel.Dock="Top" MinWidth="400" Name="filesPanel" Orientation="Vertical">
-                        <ItemsControl ItemsSource="{Binding Path= Trees.SelectedValue}" Margin=" 5,20,5,10" >
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Margin ="10" Orientation="Horizontal" IsItemsHost="True"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <DataTemplate.Resources>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="FontSize" Value="13"/>
-                                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Margin" Value="5"/>
-                                        </Style>
-                                    </DataTemplate.Resources>
-                                    <Border Style="{StaticResource BorderStyle}">
-                                        <StackPanel Name="panel" Width="90" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,10,0,0">
-                                            <StackPanel.ContextMenu>
-                                                <ContextMenu>
-                                                    <MenuItem Header="Открыть" Command="{Binding PlayFileCommand}" CommandParameter="{Binding File}"/>
-                                                    <MenuItem Header="Добавить в базу" Command="{Binding SaveFileCommand}" CommandParameter="{Binding File}"></MenuItem>
-                                                </ContextMenu>
-                                            </StackPanel.ContextMenu>
-                                            <Image Width="70" Height="70" Stretch="Fill" Source="{Binding Path=File.Type, Converter={x:Static local:ToImageConverter.Instance}}"/>
-                                            <TextBlock Text="{Binding File.Name}"/>
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-        </ScrollViewer>
         </DockPanel>
-        <StackPanel DockPanel.Dock="Right" Name="playerPanel" Orientation="Vertical">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel DockPanel.Dock="Top" MinWidth="400" Name="filesPanel" Orientation="Vertical">
+                <ItemsControl ItemsSource="{Binding Path= Trees.SelectedValue}" Margin=" 5,20,5,10" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Margin ="10" Orientation="Horizontal" IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <DataTemplate.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="FontSize" Value="13"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                    <Setter Property="Margin" Value="5"/>
+                                </Style>
+                            </DataTemplate.Resources>
+                            <Border Style="{StaticResource BorderStyle}">
+                                <StackPanel Name="panel" Width="90" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,10,0,0">
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Открыть" Command="{Binding PlayFileCommand}" CommandParameter="{Binding File}"/>
+                                            <MenuItem Header="Добавить в базу" Command="{Binding SaveFileCommand}" CommandParameter="{Binding File}"></MenuItem>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
+                                    <Image Width="70" Height="70" Stretch="Fill" Source="{Binding Path=File.Type, Converter={x:Static local:ToImageConverter.Instance}}"/>
+                                    <TextBlock Text="{Binding File.Name}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Name="playerPanel" Orientation="Vertical">
             <StackPanel.DataContext>
                 <viewModel:FileViewModel/>
             </StackPanel.DataContext>
-            <Button Style="{StaticResource ThirdButtonCollapseStyle}" CommandParameter="{Binding ElementName=playerPanel}"/>
             <MediaElement Name="media" Source="{Binding MediaElementSourse}"/>
             <StackPanel  Orientation="Horizontal">
                 <Button Style="{StaticResource ButtonPlayerStyle}" x:Name="playButton" Content="Play" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" Height="25"/>
