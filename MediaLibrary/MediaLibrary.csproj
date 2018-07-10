@@ -68,8 +68,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command.cs" />
     <Compile Include="DisplayRootRegistry.cs" />
-    <Compile Include="Commands\MyCommand.cs" />
     <Compile Include="Extensions\CatalogViewModelCollectionExtension.cs" />
     <Compile Include="Extensions\CatalogViewModelExtension.cs" />
     <Compile Include="Extensions\CategoryViewModelExtension.cs" />
@@ -81,16 +81,22 @@
     <Compile Include="Logic\CatalogVMLogic.cs" />
     <Compile Include="Logic\FileVMLogic.cs" />
     <Compile Include="Logic\MediaTypeVMLogic.cs" />
+    <Compile Include="ToSizeConverter.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\FileViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MediaTypeViewModel.cs" />
+    <Compile Include="ViewModels\MediaViewModel.cs" />
     <Compile Include="ViewModels\SaveFileWindowViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />
     <Compile Include="Views\SaveFileWindow.xaml.cs">
       <DependentUpon>SaveFileWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\Styles\MainWindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,8 +105,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\OpenWindowCommand.cs" />
     <Compile Include="ToImageConverter.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
@@ -140,20 +144,30 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\drive.png" />
-    <Resource Include="Images\folder.png" />
+    <Resource Include="Resources\Images\drive.png" />
+    <Resource Include="Resources\Images\folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\file.png" />
-    <Resource Include="Images\image.png" />
-    <Resource Include="Images\music.png" />
-    <Resource Include="Images\video.png" />
+    <Resource Include="Resources\Images\file.png" />
+    <Resource Include="Resources\Images\image.png" />
+    <Resource Include="Resources\Images\music.png" />
+    <Resource Include="Resources\Images\video.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MediaLibraryDataAccess\MediaLibraryDataAccess.csproj">
       <Project>{8D64FA90-09A2-450E-8FDB-56F4CC9AB75A}</Project>
       <Name>MediaLibraryDataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\playmusic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\play.png" />
+    <Resource Include="Resources\Images\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\pause.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

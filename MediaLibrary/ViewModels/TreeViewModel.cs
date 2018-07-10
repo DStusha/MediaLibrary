@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MediaLibrary.Commands;
 using MediaLibrary.Logic;
-using System.Collections.Generic;
 using System;
 
 namespace MediaLibrary.ViewModels
@@ -12,7 +10,7 @@ namespace MediaLibrary.ViewModels
         ObservableCollection<FileViewModel> selectedValue;
         public string CatalogPath { get; set; }
         public int CategoryId { get; set; }
-        public List<CatalogViewModel> CatalogsRoot { get; set; }
+        ObservableCollection<CatalogViewModel> catalogsRoot;
         public ObservableCollection<MediaTypeViewModel> CategoriesRoot { get; set; }
         public ICommand SelectedCommand { get; private set; }
         public ICommand UnloadedCommand { get; private set; }
@@ -25,6 +23,16 @@ namespace MediaLibrary.ViewModels
             {
                 selectedValue = value;
                 OnPropertyChanged("SelectedValue");
+            }
+        }
+
+        public ObservableCollection<CatalogViewModel> CatalogsRoot
+        {
+            get { return catalogsRoot; }
+            set
+            {
+                catalogsRoot = value;
+                OnPropertyChanged("CatalogsRoot");
             }
         }
 
@@ -86,6 +94,6 @@ namespace MediaLibrary.ViewModels
                 }
                 else { SelectedValue = null; }
             }                 
-        }
+        }       
     }
 }

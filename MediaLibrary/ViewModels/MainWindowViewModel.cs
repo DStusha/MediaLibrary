@@ -1,7 +1,5 @@
-﻿using MediaLibrary.Commands;
-using MediaLibrary.Logic;
+﻿using MediaLibrary.Logic;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MediaLibrary.ViewModels
@@ -9,6 +7,7 @@ namespace MediaLibrary.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         TreeViewModel trees;
+        public static MediaViewModel Media { get; set; }
         public ICommand Collapse { get; private set; }
         public ICommand Visible { get; private set; }
 
@@ -26,6 +25,7 @@ namespace MediaLibrary.ViewModels
         {
             Collapse = new Command(CollapseElement);
             Visible = new Command(VisibleElement);
+            Media = new MediaViewModel();
             Trees = new TreeViewModel() { CatalogPath = Properties.Settings.Default.CatalogPath,  SelectedValue = FileVMLogic.GetFiles(Properties.Settings.Default.CatalogPath), CategoryId = Properties.Settings.Default.CategoryId };
         }
 

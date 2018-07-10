@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\App.xaml
-2725089380
+3516565110
 
-342034861768
+34-1001914583
 21-503244049
-Views\MainWindow.xaml;Views\SaveFileWindow.xaml;
+Resources\Styles\MainWindowStyles.xaml;Views\MainWindow.xaml;Views\SaveFileWindow.xaml;
 
-True
+False
 

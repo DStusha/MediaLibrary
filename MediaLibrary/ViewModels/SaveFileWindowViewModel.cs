@@ -1,5 +1,4 @@
-﻿using MediaLibrary.Commands;
-using MediaLibrary.Logic;
+﻿using MediaLibrary.Logic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows;

@@ -1,15 +1,15 @@
-﻿using MediaLibrary.ViewModels;
-using MediaLibrary.Extensions;
+﻿using MediaLibrary.Extensions;
+using MediaLibrary.ViewModels;
 using MediaLibraryDataAccess.DataServices;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MediaLibrary.Logic
 {
     public static class CatalogVMLogic
     {
-        public static List<CatalogViewModel> GetCatalogViewModels()
+        public static ObservableCollection<CatalogViewModel> GetCatalogViewModels()
         {
-            return CatalogService.GetCatalogs().ToCatalogViewModelCollection();
+            return CatalogService.GetCatalogs().ToCatalogViewModelCollection(out bool flag);
         }
     }
 }

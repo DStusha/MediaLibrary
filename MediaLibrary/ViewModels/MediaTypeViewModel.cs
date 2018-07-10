@@ -5,6 +5,7 @@ namespace MediaLibrary.ViewModels
     public class MediaTypeViewModel: BaseViewModel
     {
         string mediaTypeName;
+        bool isExpanded;
         ObservableCollection<CategoryViewModel> categories;
 
         public MediaTypeViewModel()
@@ -29,6 +30,16 @@ namespace MediaLibrary.ViewModels
             {
                 categories = value;
                 OnPropertyChanged("Categories");
+            }
+        }
+
+        public bool IsExpanded
+        {
+            get { return isExpanded; }
+            set
+            {
+                isExpanded = value;
+                OnPropertyChanged("IsExpanded");
             }
         }
     }

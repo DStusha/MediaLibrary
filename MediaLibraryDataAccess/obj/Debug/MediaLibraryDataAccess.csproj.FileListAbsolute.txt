@@ -20,3 +20,4 @@ C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAcces
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\obj\Debug\MediaLibraryDataAccess.dll
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\obj\Debug\MediaLibraryDataAccess.pdb
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibraryDataAccess\obj\Debug\MediaLibraryDataAccess.csprojResolveAssemblyReference.cache

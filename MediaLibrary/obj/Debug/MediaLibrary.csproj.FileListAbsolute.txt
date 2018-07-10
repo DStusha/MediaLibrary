@@ -58,3 +58,4 @@ C:\Users\123\Desktop\MediaLibrary\MediaLibrary\obj\Debug\MediaLibrary.Properties
 C:\Users\123\Desktop\MediaLibrary\MediaLibrary\obj\Debug\MediaLibrary.csproj.GenerateResource.Cache
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\MediaLibraryDataAccess.dll
 C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\bin\Debug\MediaLibraryDataAccess.dll.config
+C:\Users\123\Настя\УНИВЕР\ЛАБЫ\MediaLibrary\MediaLibrary\obj\Debug\Resources\Styles\MainWindowStyles.baml

@@ -1,4 +1,4 @@
-﻿<Window x:Class="MediaLibrary.Views.MainWindow"
+﻿<Window Name="wind" x:Class="MediaLibrary.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,102 +12,33 @@
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <Style x:Key="CatalogTreeStyle" TargetType="{x:Type TreeView}">
-            <Setter Property="SelectedValuePath" Value="FullName" />
-        </Style>
-        <Style x:Key="FirstButtonCollapseStyle" TargetType="{x:Type Button}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=tabControl, Path=Visibility}"
-                            Value="Collapsed">
-                    <Setter Property="Content" Value="Развернуть" />
-                    <Setter Property="Command" Value="{Binding Visible}" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=tabControl, Path=Visibility}"
-                            Value="Visible">
-                    <Setter Property="Content" Value="Свернуть" />
-                    <Setter Property="Command" Value="{Binding Collapse}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="SecondButtonCollapseStyle" TargetType="{x:Type Button}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=filesPanel, Path=Visibility}"
-                            Value="Collapsed">
-                    <Setter Property="Content" Value="Развернуть" />
-                    <Setter Property="Command" Value="{Binding Visible}" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=filesPanel, Path=Visibility}"
-                            Value="Visible">
-                    <Setter Property="Content" Value="Свернуть" />
-                    <Setter Property="Command" Value="{Binding Collapse}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="ThirdButtonCollapseStyle" TargetType="{x:Type Button}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=playerPanel, Path=Visibility}"
-                            Value="Collapsed">
-                    <Setter Property="Content" Value="Развернуть" />
-                    <Setter Property="Command" Value="{Binding Visible}" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=playerPanel, Path=Visibility}"
-                            Value="Visible">
-                    <Setter Property="Content" Value="Свернуть" />
-                    <Setter Property="Command" Value="{Binding Collapse}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="ButtonPlayerStyle" TargetType="{x:Type Button}">
-            <Setter Property="Visibility" Value="Hidden" />
-        </Style>
-        <Style x:Key="CategoryTreeStyle" TargetType="{x:Type TreeView}">
-            <Setter Property="SelectedValuePath" Value="Id" />
-        </Style>
-        <Style x:Key="TreeCatalogItemStyle" TargetType="{x:Type TreeViewItem}">
-            <Setter Property="IsSelected"
-                                Value="{Binding Path=IsSelected, Mode=TwoWay}" />
-            <Setter Property="IsExpanded"
-                                Value="True" />
-        </Style>
-        <Style x:Key="TreeCategoryItemStyle" TargetType="{x:Type TreeViewItem}">
-            <Setter Property="IsSelected"
-                             Value="{Binding Path=IsSelected, Mode=TwoWay}" />
-            <Setter Property="IsExpanded"
-                                Value="True" />
-        </Style>
-        <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
-            <Style.Setters>
-                <Setter Property="Margin" Value="10" />
-                <Setter Property="BorderThickness" Value="1"/>
-            </Style.Setters>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="Blue"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/MainWindowStyles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
-    <DockPanel LastChildFill="True">
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <Button Style="{StaticResource FirstButtonCollapseStyle}" CommandParameter="{Binding ElementName=tabControl}"/>
+    <DockPanel LastChildFill="true">
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
+            <Button DockPanel.Dock="Left" Style="{StaticResource FirstButtonCollapseStyle}" CommandParameter="{Binding ElementName=tabControl}"/>
+            <Button DockPanel.Dock="Right" Style="{StaticResource ThirdButtonCollapseStyle}" CommandParameter="{Binding ElementName=playerPanel}"/>
             <Button Style="{StaticResource SecondButtonCollapseStyle}" CommandParameter="{Binding ElementName=filesPanel}" />
-            <Button Style="{StaticResource ThirdButtonCollapseStyle}" CommandParameter="{Binding ElementName=playerPanel}"/>
-        </StackPanel>
-        <DockPanel DockPanel.Dock="Left" MinWidth="150" MaxWidth="250">
-            <TabControl Name="tabControl">
+        </DockPanel>
+        <DockPanel LastChildFill="True">
+            <TabControl DockPanel.Dock="Left" Name="tabControl" MaxWidth="160">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding Trees.TabSelectedCommand}"
-                                       CommandParameter="{Binding ElementName=tabControl, Path=SelectedIndex}"/>
+                                           CommandParameter="{Binding ElementName=tabControl, Path=SelectedIndex}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <TabItem Header="Каталоги">
-                    <TreeView ItemContainerStyle="{StaticResource TreeCatalogItemStyle}" Style="{StaticResource CatalogTreeStyle}" Name="trwCatalogs" Margin="5" ItemsSource="{Binding Trees.CatalogsRoot}" >
+                    <TreeView ItemContainerStyle="{StaticResource TreeItemStyle}" Style="{StaticResource CatalogTreeStyle}" Name="trwCatalogs" Margin="5" ItemsSource="{Binding Trees.CatalogsRoot}" >
                         <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding CatalogChildren}">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Name="img" Width="15" Height="18" Stretch="Fill" Source="{Binding Path=Name,
-                     Converter={x:Static local:ToImageConverter.Instance}}"/>
+                         Converter={x:Static local:ToImageConverter.Instance}}"/>
                                     <TextBlock Text="{Binding Name}" Margin="5,0" />
                                 </StackPanel>
                             </HierarchicalDataTemplate>
@@ -115,13 +46,13 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectedItemChanged">
                                 <i:InvokeCommandAction Command="{Binding Trees.SelectedCommand}"
-                                       CommandParameter="{Binding ElementName=trwCatalogs, Path=SelectedValue}"/>
+                                           CommandParameter="{Binding ElementName=trwCatalogs, Path=SelectedValue}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TreeView>
                 </TabItem>
                 <TabItem Header="Категории">
-                    <TreeView ItemContainerStyle="{StaticResource TreeCategoryItemStyle}" Style="{StaticResource CategoryTreeStyle}" Name="trwCategories" Margin="5" ItemsSource="{Binding Trees.CategoriesRoot}">
+                    <TreeView ItemContainerStyle="{StaticResource TreeItemStyle}" Style="{StaticResource CategoryTreeStyle}" Name="trwCategories" Margin="5" ItemsSource="{Binding Trees.CategoriesRoot}">
                         <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding Categories}">
                                 <TextBlock Text="{Binding MediaTypeName}" />
@@ -140,54 +71,63 @@
                     </TreeView>
                 </TabItem>
             </TabControl>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Style="{StaticResource FilesColumnStyle}"/>
+                    <ColumnDefinition Style="{StaticResource PlayerColumnStyle}"/>
+                </Grid.ColumnDefinitions>
+                <ScrollViewer Grid.Column="0" Visibility="{Binding ElementName=filesPanel, Path=Visibility}" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Grid.Column="0" Name="filesPanel">
+                        <ItemsControl ItemsSource="{Binding Path=Trees.SelectedValue}" Margin=" 5,20,5,10" >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Margin ="7" Orientation="Horizontal" IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <DataTemplate.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontSize" Value="13"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Margin" Value="5"/>
+                                        </Style>
+                                    </DataTemplate.Resources>
+                                    <Border Style="{StaticResource BorderStyle}">
+                                        <StackPanel Width="90" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,10,0,0">
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Открыть" Command="{Binding PlayFileCommand}" CommandParameter="{Binding File}"/>
+                                                    <MenuItem Header="Добавить в базу" Command="{Binding SaveFileCommand}" CommandParameter="{Binding File}"></MenuItem>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                            <Image Width="70" Height="70" Stretch="Fill" Source="{Binding Path=File.Type, Converter={x:Static local:ToImageConverter.Instance}}"/>
+                                            <TextBlock Text="{Binding File.Name}"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+                <StackPanel Style="{StaticResource PlayerPanelStyle}" Grid.Column="1" Name="playerPanel">
+                    <Image Panel.ZIndex="0" Name="Img" Style="{StaticResource ImageStyle}" Source="{Binding Media.ImageSource}"/>
+                    <MediaElement Panel.ZIndex="1" Name="Media"/>
+                    <StackPanel Style="{StaticResource PlayerButtonsPanelStyle}">
+                        <Button Style="{StaticResource PlayerButtonsStyle}" x:Name="playButton" Command="{Binding Media.PlayCommand}" CommandParameter="{Binding ElementName=Media}" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <Image Stretch="Fill" Source="pack://application:,,,/Resources/Images/play.png"/>
+                        </Button>
+                        <Button Style="{StaticResource PlayerButtonsStyle}" x:Name="pauseButton" Command="{Binding Media.PauseCommand}" CommandParameter="{Binding ElementName=Media}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image Stretch="Fill" Source="pack://application:,,,/Resources/Images/pause.png"/>
+                        </Button>
+                        <Button Style="{StaticResource PlayerButtonsStyle}" x:Name="stopButton" Command="{Binding Media.StopCommand}" CommandParameter="{Binding ElementName=Media}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <Image Stretch="Fill" Source="pack://application:,,,/Resources/Images/stop.png"/>
+                        </Button>
+                    </StackPanel>
+            </StackPanel>
+            </Grid>
         </DockPanel>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel DockPanel.Dock="Top" MinWidth="400" Name="filesPanel" Orientation="Vertical">
-                <ItemsControl ItemsSource="{Binding Path= Trees.SelectedValue}" Margin=" 5,20,5,10" >
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Margin ="10" Orientation="Horizontal" IsItemsHost="True"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <DataTemplate.Resources>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="FontSize" Value="13"/>
-                                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                                    <Setter Property="TextWrapping" Value="Wrap"/>
-                                    <Setter Property="Margin" Value="5"/>
-                                </Style>
-                            </DataTemplate.Resources>
-                            <Border Style="{StaticResource BorderStyle}">
-                                <StackPanel Name="panel" Width="90" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,10,0,0">
-                                    <StackPanel.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Открыть" Command="{Binding PlayFileCommand}" CommandParameter="{Binding File}"/>
-                                            <MenuItem Header="Добавить в базу" Command="{Binding SaveFileCommand}" CommandParameter="{Binding File}"></MenuItem>
-                                        </ContextMenu>
-                                    </StackPanel.ContextMenu>
-                                    <Image Width="70" Height="70" Stretch="Fill" Source="{Binding Path=File.Type, Converter={x:Static local:ToImageConverter.Instance}}"/>
-                                    <TextBlock Text="{Binding File.Name}"/>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </ScrollViewer>
-        <StackPanel Name="playerPanel" Orientation="Vertical">
-            <StackPanel.DataContext>
-                <viewModel:FileViewModel/>
-            </StackPanel.DataContext>
-            <MediaElement Name="media" Source="{Binding MediaElementSourse}"/>
-            <StackPanel  Orientation="Horizontal">
-                <Button Style="{StaticResource ButtonPlayerStyle}" x:Name="playButton" Content="Play" VerticalAlignment="Center" HorizontalAlignment="Left" Width="60" Height="25"/>
-                <Button Style="{StaticResource ButtonPlayerStyle}" x:Name="pauseButton" Content="Pause" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Height="25"/>
-                <Button Style="{StaticResource ButtonPlayerStyle}" x:Name="stopButton" Content="Stop" VerticalAlignment="Center" HorizontalAlignment="Right" Width="60" Height="25" />
-            </StackPanel>
-            <Image  Source="{Binding ImageSourse}"/>
-        </StackPanel>
     </DockPanel>
 </Window>
 

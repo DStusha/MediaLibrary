@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace MediaLibrary.ViewModels
 {
@@ -9,11 +8,11 @@ namespace MediaLibrary.ViewModels
         string fullName;
         bool isSelected;
         bool isExpanded;
-        public List<CatalogViewModel> CatalogChildren { get; set; }
+        ObservableCollection<CatalogViewModel> catalogChildren;
 
         public CatalogViewModel()
         {
-            CatalogChildren = new List<CatalogViewModel>();
+            CatalogChildren = new ObservableCollection<CatalogViewModel>();
         }
 
         public string FullName
@@ -23,6 +22,16 @@ namespace MediaLibrary.ViewModels
             {
                 fullName = value;
                 OnPropertyChanged("FullName");
+            }
+        }
+
+        public ObservableCollection<CatalogViewModel> CatalogChildren
+        {
+            get { return catalogChildren; }
+            set
+            {
+                catalogChildren = value;
+                OnPropertyChanged("CatalogChildren ");
             }
         }
 

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.AccessControl;
 
 namespace MediaLibraryDataAccess.DataServices
 {
@@ -10,7 +12,7 @@ namespace MediaLibraryDataAccess.DataServices
         public static List<Catalog> GetCatalogs()
         {
             List<Catalog> catalogs = new List<Catalog>();
-            foreach (DriveInfo drive in DriveInfo.GetDrives())
+            foreach (DriveInfo drive in DriveInfo.GetDrives().Where(d => d.IsReady == true))
             {
                 try
                 {
@@ -18,8 +20,8 @@ namespace MediaLibraryDataAccess.DataServices
                     {
                         Name = drive.ToString(),
                         FullName = drive.RootDirectory.FullName,
-                        CatalogChildren = GetCatalogs(drive)
-                    };
+                        CatalogChildren = GetCatalogs(drive.RootDirectory)
+                    };               
                     catalogs.Add(c);
                 }
                 catch (Exception ex)
@@ -30,31 +32,20 @@ namespace MediaLibraryDataAccess.DataServices
             return catalogs;
         }
 
-        private static List<Catalog> GetCatalogs(object o)
+        private static List<Catalog> GetCatalogs(DirectoryInfo dir)
         {
             List<Catalog> result = new List<Catalog>();
-            DirectoryInfo dir;
-            if (o is DriveInfo)
-            {
-                DriveInfo d = o as DriveInfo;
-                dir = d.RootDirectory;
-            }
-            else
-            {
-                dir = o as DirectoryInfo;
-            }
-            foreach (DirectoryInfo directoryinfo in dir.EnumerateDirectories())
+            foreach (DirectoryInfo directoryinfo in dir.EnumerateDirectories("*.*", SearchOption.TopDirectoryOnly).Where(d => !d.Attributes.HasFlag(FileAttributes.Hidden | FileAttributes.System)&&d.GetAccess()))
             {
                 try
                 {
-                    Catalog ctlg = new Catalog()
-                    {
+                    Catalog c = new Catalog()
+                    { 
                         CatalogChildren = GetCatalogs(directoryinfo),
                         Name = directoryinfo.Name,
                         FullName = directoryinfo.FullName
                     };
-                    result.Add(ctlg);
-
+                    result.Add(c);
                 }
                 catch (Exception ex)
                 {
@@ -62,6 +53,20 @@ namespace MediaLibraryDataAccess.DataServices
                 }
             }
             return result;
+        }
+        
+        private static bool GetAccess(this DirectoryInfo dir)
+        {
+            DirectorySecurity d = dir.GetAccessControl();
+            var rules = d.GetAccessRules(true, true, typeof(System.Security.Principal.SecurityIdentifier));
+            foreach (FileSystemAccessRule rule in rules)
+            {
+                if (!rule.FileSystemRights.HasFlag(FileSystemRights.ListDirectory))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

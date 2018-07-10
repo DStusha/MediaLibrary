@@ -3,6 +3,9 @@ using MediaLibrary.Extensions;
 using System.Collections.ObjectModel;
 using MediaLibraryDataAccess.DataServices;
 using System.IO;
+using MediaLibraryDataAccess;
+using System.Windows.Media.Imaging;
+using System;
 
 namespace MediaLibrary.Logic
 {
@@ -26,14 +29,53 @@ namespace MediaLibrary.Logic
 
         public static string CreateTempFile(FileViewModel file)
         {
-            string path = Path.GetTempPath()+@"\" + file.Name;
-            File.WriteAllBytes(path, file.Content);
-            return path;
+            if (File.Exists(file.FullName)) return file.FullName;
+            return FileService.CreateTempFile(file.FullName, file.Content);
         }
 
-        public static bool IsFileExists(FileViewModel file)
+        public static void SetMediaSource(FileViewModel file)
         {
-            return FileService.IsFileExists(file.ToFileModel());
+            try
+            {
+                ClearSource();
+                switch ((file as FileViewModel).Type)
+                {
+                    case FileTypesConstants.Audio:
+                        MainWindowViewModel.Media.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/playmusic.png"));
+                        MainWindowViewModel.Media.MediaElementSource = CreateTempFile(file);
+                        break;
+                    case FileTypesConstants.Video:
+                        MainWindowViewModel.Media.IsVisible = true;
+                        MainWindowViewModel.Media.MediaElementSource = CreateTempFile(file);
+                        break;
+                    case FileTypesConstants.Image:
+                        MainWindowViewModel.Media.ImageSource = new BitmapImage(new Uri(CreateTempFile(file)));
+                        break;                   
+                }               
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message, ex.StackTrace);
+            }
+        }
+
+        public static void ClearSource()
+        {
+            MainWindowViewModel.Media.MediaElementSource = null;
+            MainWindowViewModel.Media.ImageSource = null;
+            MainWindowViewModel.Media.IsPause = false;
+            MainWindowViewModel.Media.IsImageSourceSet = false;
+            MainWindowViewModel.Media.IsMediaSourceSet = false;
+            MainWindowViewModel.Media.IsVisible = false ;
+        }
+
+        public static bool IsFileExistsInDb(FileViewModel file)
+        {
+            if (file.IdCategory == 0)
+            {
+                return FileService.IsFileExists(file.ToFileModel());
+            }
+            else return true;
         }
     }
 }

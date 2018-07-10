@@ -18,25 +18,25 @@ namespace MediaLibrary
             Uri uri;
             if ((value as string).Contains(@"\"))
             {
-                uri = new Uri("pack://application:,,,/Images/drive.png");
+                uri = new Uri("pack://application:,,,/Resources/Images/drive.png");
             }
             else
             {
                 switch (value as string)
                 {
                     case FileTypesConstants.Audio:
-                        uri = new Uri("pack://application:,,,/Images/music.png");
+                        uri = new Uri("pack://application:,,,/Resources/Images/music.png");
                         break;
                     case FileTypesConstants.Video:
-                        uri = new Uri("pack://application:,,,/Images/video.png");
+                        uri = new Uri("pack://application:,,,/Resources/Images/video.png");
                         break;
                     case FileTypesConstants.Image:
-                        uri = new Uri("pack://application:,,,/Images/image.png");
+                        uri = new Uri("pack://application:,,,/Resources/Images/image.png");
                         break;
                     case FileTypesConstants.Other:
-                        uri = new Uri("pack://application:,,,/Images/file.png");
+                        uri = new Uri("pack://application:,,,/Resources/Images/file.png");
                         break;
-                    default:uri = new Uri("pack://application:,,,/Images/folder.png");
+                    default:uri = new Uri("pack://application:,,,/Resources/Images/folder.png");
                         break;
                 }                                
             }

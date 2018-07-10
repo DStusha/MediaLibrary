@@ -15,12 +15,13 @@ namespace MediaLibrary.Extensions
                Name = Path.GetFileName(f.Name),
                FullName = f.Name,
                Type = FileService.GetFileTypeByExtension(f.Extension),
-               IdCategory= f.Id_category
+               IdCategory= f.Id_category,
+               Content = f.Content
             };
             if (String.IsNullOrEmpty(Path.GetExtension(f.Name))){
-                file.Name = f.Name + f.Extension;
+                file.FullName = f.Name + f.Extension;
             }
-            if (file.Type != FileTypesConstants.Other)
+            if (file.IdCategory==0 && file.Type != FileTypesConstants.Other)
             {
                 file.Content = FileService.GetContent(file.FullName);
             }

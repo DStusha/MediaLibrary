@@ -5,15 +5,14 @@ namespace MediaLibrary.Extensions
 {
     public static class CategoryViewModelExtension
     {
-        public static CategoryViewModel ToCategoryViewModel(this Category c)
+        public static CategoryViewModel ToCategoryViewModel(this Category c, out bool isExpanded)
         {
             CategoryViewModel cvm = new CategoryViewModel()
             {
                 Name = c.Category_name,
-                Id = c.Id,
-                IsSelected = false
+                Id = c.Id
             };
-            if(cvm.Id == Properties.Settings.Default.CategoryId) { cvm.IsSelected = true; }
+            isExpanded = cvm.IsSelected = (cvm.Id == Properties.Settings.Default.CategoryId); 
             return cvm;
         }
     }

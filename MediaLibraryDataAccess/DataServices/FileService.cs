@@ -44,6 +44,13 @@ namespace MediaLibraryDataAccess.DataServices
             }
         }
 
+        public static string CreateTempFile(string name, byte[] content)
+        {
+            string path = Path.GetTempPath() + Path.DirectorySeparatorChar + name;
+            if(!File.Exists(path))File.WriteAllBytes(path, content);
+            return path;
+        }
+
         public static byte[] GetContent(string fullName)
         {
             try
@@ -88,7 +95,6 @@ namespace MediaLibraryDataAccess.DataServices
                     {
                         Name = f.FullName,
                         Extension = f.Extension
-
                     };
                     res.Add(file);
                 }
